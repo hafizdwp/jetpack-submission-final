@@ -48,7 +48,7 @@ class MainFragment : BaseFragment() {
     }
 
     fun setupObserver() = mViewModel.apply {
-        requestState.observe {
+        sliderState.observe {
             when (it) {
                 is MyRequestState.Loading -> {
                     myProgressView.start()
@@ -61,7 +61,7 @@ class MainFragment : BaseFragment() {
                     tabSlider.visible()
                 }
                 is MyRequestState.Failed -> {
-                    myProgressView.stopAndError(errorMsg = it.errorMsg ?: "")
+                    myProgressView.stopAndError(it.errorMsg ?: "")
                     myProgressView.setRetryClickListener {
                         getListSlider()
                     }
@@ -113,8 +113,7 @@ class MainFragment : BaseFragment() {
         })
         tabMenu.setupWithViewPager(vpMenu)
 
-        vpMenu.currentItem = 0
-        vpMenu.currentItem = 0
+        vpMenu.currentItem = 1
         vpMenu.currentItem = 0
     }
 

@@ -1,9 +1,6 @@
 package me.hafizdwp.jetpack_submission_final.data.source
 
-import androidx.lifecycle.LiveData
 import me.hafizdwp.jetpack_submission_final.data.source.remote.ApiCallback
-import me.hafizdwp.jetpack_submission_final.data.source.remote.response.MovieResponse
-import me.hafizdwp.jetpack_submission_final.data.source.remote.response.TvShowResponse
 
 /**
  * @author hafizdwp
@@ -19,13 +16,9 @@ interface MyDataSource {
 
     suspend fun getTopRatedMovies(callback: ApiCallback<List<Movreak>>)
 
-    fun getPopularMovies(): LiveData<List<MovieResponse>> {
-        throw Exception("remote only")
-    }
+    suspend fun getPopularMovies(callback: ApiCallback<List<Movreak>>)
 
-    fun getPopularTvShows(): LiveData<List<TvShowResponse>> {
-        throw Exception("remote only")
-    }
+    suspend fun getPopularTvShows(callback: ApiCallback<List<Movreak>>)
     ///
     ///
     /// LOCAL

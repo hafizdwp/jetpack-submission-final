@@ -3,6 +3,7 @@ package me.hafizdwp.jetpack_submission_final.data.source
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import me.hafizdwp.jetpack_submission_final.data.source.remote.response.MovieResponse
+import me.hafizdwp.jetpack_submission_final.data.source.remote.response.TvShowResponse
 
 /**
  * @author hafizdwp
@@ -25,7 +26,7 @@ data class Movreak(
     }
 
     companion object {
-        fun toListFrom(list: List<MovieResponse>?): List<Movreak> {
+        fun toListFromMovie(list: List<MovieResponse>?): List<Movreak> {
             val array = arrayListOf<Movreak>()
             list?.forEach {
                 array.add(Movreak(
@@ -36,6 +37,22 @@ data class Movreak(
                         rating = it.vote_average,
                         releaseDate = it.release_date,
                         type = Type.MOVIE
+                ))
+            }
+            return array
+        }
+
+        fun toListFromTv(list: List<TvShowResponse>?): List<Movreak> {
+            val array = arrayListOf<Movreak>()
+            list?.forEach {
+                array.add(Movreak(
+                        title = it.name,
+                        overview = it.overview,
+                        posterPath = it.poster_path,
+                        backdropPath = it.backdrop_path,
+                        rating = it.vote_average,
+                        releaseDate = it.first_air_date,
+                        type = Type.TV_SHOW
                 ))
             }
             return array

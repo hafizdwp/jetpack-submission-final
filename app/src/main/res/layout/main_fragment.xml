@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBlackDesign"
     android:orientation="vertical">
 
     <!-- toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:background="@color/blackDesign"
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -18,14 +20,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imgMovreak"
-                android:layout_width="@dimen/dimens_36dp"
-                android:layout_height="@dimen/dimens_36dp"
+                android:layout_width="@dimen/dimens_30dp"
+                android:layout_height="@dimen/dimens_30dp"
                 android:layout_marginEnd="@dimen/dimens_8dp"
                 android:src="@drawable/ic_popcorn"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/textToolbarTitle"
@@ -37,13 +40,23 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/movreak"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/size_20sp"
+                android:textColor="@color/yellowDesign"
+                android:textSize="@dimen/size_18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/imgMovreak"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_gravity="bottom"
+                android:background="@color/greyDesign"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textToolbarTitle"
+                app:layout_constraintVertical_bias="1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -75,7 +88,7 @@
                 <me.hafizdwp.jetpack_submission_final.utils.widget.MyProgressView
                     android:id="@+id/myProgressView"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dimens_256dp"
+                    android:layout_height="@dimen/dimens_192dp"
                     android:background="@color/lightBlackDesign"
                     android:gravity="center"
                     android:visibility="gone"
@@ -86,7 +99,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/vpSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimens_256dp"
+                    android:layout_height="@dimen/dimens_192dp"
                     android:visibility="visible"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -123,35 +136,24 @@
                 app:tabIndicatorColor="@color/black"
                 app:tabMode="fixed" />
 
-            <!--            <com.ogaclejapan.smarttablayout.SmartTabLayout-->
-            <!--                android:id="@+id/tabMenu"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="?actionBarSize"-->
-            <!--                android:background="@color/blackDesign"-->
-            <!--                android:clipToPadding="false"-->
-            <!--                android:paddingLeft="4dp"-->
-            <!--                android:paddingRight="4dp"-->
-            <!--                app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--                app:layout_constraintRight_toRightOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/sliderGroup"-->
-            <!--                app:stl_defaultTabTextAllCaps="false"-->
-            <!--                app:stl_defaultTabTextColor="@color/white"-->
-            <!--                app:stl_defaultTabTextHorizontalPadding="@dimen/dimens_16dp"-->
-            <!--                app:stl_dividerThickness="0dp"-->
-            <!--                app:stl_indicatorColor="@color/yellowDesign"-->
-            <!--                app:stl_indicatorCornerRadius="@dimen/dimens_16dp"-->
-            <!--                app:stl_indicatorGravity="center"-->
-            <!--                app:stl_indicatorInterpolation="smart"-->
-            <!--                app:stl_indicatorThickness="@dimen/dimens_30dp"-->
-            <!--                app:stl_underlineThickness="0dp" />-->
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/vpMenu"
+            <View
+                android:id="@+id/divider"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0.5dp"
+                android:background="@color/greyDesign"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tabMenu" />
+
+            <me.hafizdwp.jetpack_submission_final.utils.widget.EnhancedWrapContentViewPager
+                android:id="@+id/vpMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/blackDesign"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

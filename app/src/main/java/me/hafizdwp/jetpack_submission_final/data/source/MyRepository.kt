@@ -22,37 +22,45 @@ open class MyRepository : MyDataSource {
         return remoteDataSource.getTopRatedMovies(callback)
     }
 
-    override fun getPopularMovies(): LiveData<List<MovieResponse>> {
-        val liveData = MutableLiveData<List<MovieResponse>>()
-        remoteDataSource.getPopularMovies(object : ApiCallback<List<MovieResponse>> {
-            override fun onSuccess(data: List<MovieResponse>) {
-                liveData.postValue(data)
-            }
-
-            override fun onFailed(e: Exception) {
-                log(e.toString())
-                liveData.postValue(null)
-            }
-        })
-
-        return liveData
+    override suspend fun getPopularMovies(callback: ApiCallback<List<Movreak>>) {
+        return remoteDataSource.getPopularMovies(callback)
     }
 
-    override fun getPopularTvShows(): LiveData<List<TvShowResponse>> {
-        val liveData = MutableLiveData<List<TvShowResponse>>()
-        remoteDataSource.getPopularTvShows(object : ApiCallback<List<TvShowResponse>> {
-            override fun onSuccess(data: List<TvShowResponse>) {
-                liveData.postValue(data)
-            }
-
-            override fun onFailed(e: Exception) {
-                log(e.toString())
-                liveData.postValue(null)
-            }
-        })
-
-        return liveData
+    override suspend fun getPopularTvShows(callback: ApiCallback<List<Movreak>>) {
+        return remoteDataSource.getPopularTvShows(callback)
     }
+
+    //    override fun getPopularMovies(): LiveData<List<MovieResponse>> {
+//        val liveData = MutableLiveData<List<MovieResponse>>()
+//        remoteDataSource.getPopularMovies(object : ApiCallback<List<MovieResponse>> {
+//            override fun onSuccess(data: List<MovieResponse>) {
+//                liveData.postValue(data)
+//            }
+//
+//            override fun onFailed(e: Exception) {
+//                log(e.toString())
+//                liveData.postValue(null)
+//            }
+//        })
+//
+//        return liveData
+//    }
+//
+//    override fun getPopularTvShows(): LiveData<List<TvShowResponse>> {
+//        val liveData = MutableLiveData<List<TvShowResponse>>()
+//        remoteDataSource.getPopularTvShows(object : ApiCallback<List<TvShowResponse>> {
+//            override fun onSuccess(data: List<TvShowResponse>) {
+//                liveData.postValue(data)
+//            }
+//
+//            override fun onFailed(e: Exception) {
+//                log(e.toString())
+//                liveData.postValue(null)
+//            }
+//        })
+//
+//        return liveData
+//    }
 
     companion object {
 

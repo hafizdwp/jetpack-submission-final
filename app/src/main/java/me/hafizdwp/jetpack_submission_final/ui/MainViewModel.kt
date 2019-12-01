@@ -17,24 +17,69 @@ import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
 class MainViewModel(val app: Application,
                     val mRepository: MyRepository) : BaseViewModel() {
 
-    private val _requestState = MutableLiveData<MyRequestState>()
-    val requestState: LiveData<MyRequestState> = Transformations.map(_requestState) { it }
+    private val _sliderState = MutableLiveData<MyRequestState>()
+    val sliderState: LiveData<MyRequestState> = Transformations.map(_sliderState) { it }
 
     private val _sliderData = MutableLiveData<List<Movreak>>()
     val sliderData: LiveData<List<Movreak>> = Transformations.map(_sliderData) { it }
 
+    private val _movieState = MutableLiveData<MyRequestState>()
+    val movieState: LiveData<MyRequestState> = Transformations.map(_movieState) { it }
+
+    private val _movieData = MutableLiveData<List<Movreak>>()
+    val movieData: LiveData<List<Movreak>> = Transformations.map(_movieData) { it }
+
+    private val _tvState = MutableLiveData<MyRequestState>()
+    val tvState: LiveData<MyRequestState> = Transformations.map(_tvState) { it }
+
+    private val _tvData = MutableLiveData<List<Movreak>>()
+    val tvData: LiveData<List<Movreak>> = Transformations.map(_tvData) { it }
+
+
     fun getListSlider() = launch {
 
-        _requestState.loading()
+        _sliderState.loading()
         mRepository.getTopRatedMovies(object : ApiCallback<List<Movreak>> {
             override fun onSuccess(data: List<Movreak>) {
-                _requestState.success()
+                _sliderState.success()
                 _sliderData.value = data
             }
 
             override fun onFailed(e: Exception) {
                 e.printStackTrace()
-                _requestState.failed(e.toString())
+                _sliderState.failed(e.toString())
+            }
+        })
+    }
+
+    fun getPopularMovies() = launch {
+
+        _movieState.loading()
+        mRepository.getPopularMovies(object : ApiCallback<List<Movreak>> {
+            override fun onSuccess(data: List<Movreak>) {
+                _movieState.success()
+                _movieData.value = data
+            }
+
+            override fun onFailed(e: Exception) {
+                e.printStackTrace()
+                _movieState.failed(e.toString())
+            }
+        })
+    }
+
+    fun getPopularTvShows() = launch {
+
+        _tvState.loading()
+        mRepository.getPopularTvShows(object : ApiCallback<List<Movreak>> {
+            override fun onSuccess(data: List<Movreak>) {
+                _tvState.success()
+                _tvData.value = data
+            }
+
+            override fun onFailed(e: Exception) {
+                e.printStackTrace()
+                _tvState.failed(e.toString())
             }
         })
     }
