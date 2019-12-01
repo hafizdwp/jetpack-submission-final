@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">jetpack-submission-final</string>
+    <string name="app_name">Movreak</string>
+
+    <string name="movreak">Movreak</string>
+    <string name="movie">Movie</string>
+    <string name="tv_show">Tv Show</string>
+    <string name="favorite">Favorite</string>
+    <string name="home">Home</string>
 </resources>

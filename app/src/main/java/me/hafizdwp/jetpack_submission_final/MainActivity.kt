@@ -1,12 +1,66 @@
 package me.hafizdwp.jetpack_submission_final
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.main_activity.*
+import me.hafizdwp.jetpack_submission_final.base.BaseActivity
+import me.hafizdwp.jetpack_submission_final.ui.favorite.FavoriteFragment
+import me.hafizdwp.jetpack_submission_final.utils.getTag
 
-class MainActivity : AppCompatActivity() {
+/**
+ * @author hafizdwp
+ * 30/11/2019
+ **/
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+    override val layoutRes: Int
+        get() = R.layout.main_activity
+
+    val mFragmentMenuList = listOf<Fragment>(
+        MainFragment.newInstance(),
+        FavoriteFragment.newInstance()
+    )
+
+
+    override fun onExtractIntents() {
+
+    }
+
+    override fun onReady() {
+
+        setupBottomNav()
+    }
+
+    fun setupBottomNav() {
+        bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.bnav_main -> selectFragment(mFragmentMenuList[0])
+                R.id.bnav_favorite -> selectFragment(mFragmentMenuList[1])
+            }
+            return@setOnNavigationItemSelectedListener true
+        }
+        selectFragment(mFragmentMenuList[0])
+    }
+
+    fun selectFragment(fragment: Fragment) {
+
+        val tag = when (fragment) {
+            is MainFragment -> MainFragment::class.java.simpleName
+            is FavoriteFragment -> FavoriteFragment::class.java.simpleName
+            else -> ""
+        }
+
+        supportFragmentManager.beginTransaction().apply {
+            if (supportFragmentManager.findFragmentByTag(tag) == null) {
+                add(R.id.frameLayout, fragment, tag)
+            }
+
+            show(fragment)
+
+            mFragmentMenuList.forEach {
+                it.takeIf { it != fragment }?.let { fragmentToHide ->
+                    hide(fragmentToHide)
+                }
+            }
+        }.commit()
     }
 }
