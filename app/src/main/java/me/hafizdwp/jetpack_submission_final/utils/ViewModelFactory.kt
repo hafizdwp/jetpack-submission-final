@@ -6,6 +6,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import me.hafizdwp.jetpack_submission_final.data.source.MyRepository
+import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
 
 /**
  * @author hafizdwp
@@ -20,8 +21,8 @@ class ViewModelFactory private constructor(
             with(modelClass) {
                 when {
 
-//                    isAssignableFrom(MovieViewModel::class.java) ->
-//                        MovieViewModel(mApplication, mRepository)
+                    isAssignableFrom(MainViewModel::class.java) ->
+                        MainViewModel(mApplication, mRepository)
 //                    isAssignableFrom(TvShowViewModel::class.java) ->
 //                        TvShowViewModel(mApplication, mRepository)
 

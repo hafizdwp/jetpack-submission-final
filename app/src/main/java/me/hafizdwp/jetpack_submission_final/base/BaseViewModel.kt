@@ -1,5 +1,6 @@
 package me.hafizdwp.jetpack_submission_final.base
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -7,12 +8,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import me.hafizdwp.jetpack_submission_final.utils.ViewModelFactory
 import me.hafizdwp.jetpack_submission_final.MyApp
+import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
 import me.hafizdwp.jetpack_submission_final.utils.livedata.SingleLiveEvent
-import retrofit2.HttpException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -42,6 +40,37 @@ open class BaseViewModel : ViewModel(), CoroutineScope {
                                action: suspend CoroutineScope.() -> T): T =
             CoroutineScope(context).async { action(this) }.await()
 
+//    fun MutableLiveData<MyRequestState>.loading() {
+//        postValue(MyRequestState.Loading)
+//    }
+//
+//    fun MutableLiveData<MyRequestState>.success() {
+//        postValue(MyRequestState.Success)
+//    }
+//
+//    fun MutableLiveData<MyRequestState>.empty(emptyMsg: String?) {
+//        postValue(MyRequestState.Empty(emptyMsg))
+//    }
+//
+//    fun MutableLiveData<MyRequestState>.failed(errorMsg: String?) {
+//        postValue(MyRequestState.Failed(errorMsg))
+//    }
+
+    fun MutableLiveData<MyRequestState>.loading() {
+        value = MyRequestState.Loading
+    }
+
+    fun MutableLiveData<MyRequestState>.success() {
+        value = MyRequestState.Success
+    }
+
+    fun MutableLiveData<MyRequestState>.empty(emptyMsg: String?) {
+        value = MyRequestState.Empty(emptyMsg)
+    }
+
+    fun MutableLiveData<MyRequestState>.failed(errorMsg: String?) {
+        value = MyRequestState.Failed(errorMsg)
+    }
 
     /**
      * Coroutine catch error message

@@ -1,5 +1,6 @@
 package me.hafizdwp.jetpack_submission_final.ui.tv_show
 
+import androidx.lifecycle.LifecycleOwner
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 
@@ -11,6 +12,8 @@ class TvShowFragment : BaseFragment() {
 
     override val layoutRes: Int
         get() = R.layout.tv_show_fragment
+    override val mLifecycleOwner: LifecycleOwner
+        get() = this
 
     override fun onExtractArguments() {
     }

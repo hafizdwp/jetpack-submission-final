@@ -18,6 +18,10 @@ open class MyRepository : MyDataSource {
     val remoteDataSource = MyRemoteDataSource()
     val localDataSource = MyLocalDataSource()
 
+    override suspend fun getTopRatedMovies(callback: ApiCallback<List<Movreak>>) {
+        return remoteDataSource.getTopRatedMovies(callback)
+    }
+
     override fun getPopularMovies(): LiveData<List<MovieResponse>> {
         val liveData = MutableLiveData<List<MovieResponse>>()
         remoteDataSource.getPopularMovies(object : ApiCallback<List<MovieResponse>> {

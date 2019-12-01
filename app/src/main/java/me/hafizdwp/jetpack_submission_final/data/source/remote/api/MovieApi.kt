@@ -21,6 +21,11 @@ interface MovieApi {
 //            @Query("language") language: String = prefs[Constant.PREF_LANGUAGE_API_QUERY] ?: "en-US"
 //    ): Observable<BaseResponse<List<MovieResponse>>>
 
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(
+            @Query("api_key") apiKey: String = BuildConfig.API_KEY
+    ): BaseResponse<List<MovieResponse>>
+
     @GET("discover/movie?sort_by=popularity.desc")
     suspend fun getPopularMovies(
             @Query("api_key") apiKey: String = BuildConfig.API_KEY

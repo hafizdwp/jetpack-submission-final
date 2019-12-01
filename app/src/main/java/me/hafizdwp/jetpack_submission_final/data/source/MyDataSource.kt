@@ -1,6 +1,7 @@
 package me.hafizdwp.jetpack_submission_final.data.source
 
 import androidx.lifecycle.LiveData
+import me.hafizdwp.jetpack_submission_final.data.source.remote.ApiCallback
 import me.hafizdwp.jetpack_submission_final.data.source.remote.response.MovieResponse
 import me.hafizdwp.jetpack_submission_final.data.source.remote.response.TvShowResponse
 
@@ -15,6 +16,8 @@ interface MyDataSource {
     /// REMOTE
     ///
     ///
+
+    suspend fun getTopRatedMovies(callback: ApiCallback<List<Movreak>>)
 
     fun getPopularMovies(): LiveData<List<MovieResponse>> {
         throw Exception("remote only")

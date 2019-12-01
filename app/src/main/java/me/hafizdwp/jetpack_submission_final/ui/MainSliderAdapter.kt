@@ -1,10 +1,11 @@
-package me.hafizdwp.jetpack_submission_final
+package me.hafizdwp.jetpack_submission_final.ui
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.custom_main_tab.view.*
+import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BasePagerAdapter
 
 /**

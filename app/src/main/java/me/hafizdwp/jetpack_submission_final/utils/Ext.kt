@@ -2,9 +2,12 @@ package me.hafizdwp.jetpack_submission_final.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -47,18 +50,6 @@ inline fun <reified T : ViewModel> AppCompatActivity.obtainViewModel() =
 
 inline fun <reified VM : ViewModel> androidx.fragment.app.Fragment.obtainViewModel() =
         ViewModelProviders.of(requireActivity(), ViewModelFactory.getInstance(requireActivity().application)).get(VM::class.java)
-
-fun View.visible() {
-    visibility = View.VISIBLE
-}
-
-fun View.invisible() {
-    visibility = View.INVISIBLE
-}
-
-fun View.gone() {
-    visibility = View.GONE
-}
 
 /**
  * Log ext
@@ -112,4 +103,67 @@ suspend fun <T> asyncAwait(context: CoroutineContext = Dispatchers.IO,
 
 inline fun <reified T> getTag(): String {
     return T::class.java.simpleName
+}
+
+/**
+ * Ez toast
+ * */
+var mToast: Toast? = null
+
+fun AppCompatActivity.toast(msg: String) {
+    if (msg.isNotBlank()) {
+        mToast = Toast.makeText(this, msg, Toast.LENGTH_LONG)
+        mToast?.show()
+    }
+}
+
+fun AppCompatActivity.toastSpammable(msg: String?) {
+    if (msg != null) {
+        if (msg.isNotBlank()) {
+            if (mToast != null) mToast?.cancel()
+            mToast = Toast.makeText(this, msg, Toast.LENGTH_LONG)
+            mToast?.show()
+        }
+    }
+}
+
+fun Fragment.toast(msg: String) {
+    (requireActivity() as? AppCompatActivity)?.toast(msg)
+}
+
+fun Fragment.toastSpammable(msg: String?) {
+    (requireActivity() as? AppCompatActivity)?.toastSpammable(msg)
+}
+
+fun <T : Fragment> T.withArgs(bundle: Bundle.() -> Unit): Fragment {
+    return this.apply {
+        arguments = Bundle().apply(bundle)
+    }
+}
+
+/**
+ * View visibility utility
+ * */
+fun View.visible() {
+    visibility = View.VISIBLE
+}
+
+fun View.invisible() {
+    visibility = View.INVISIBLE
+}
+
+fun View.gone() {
+    visibility = View.GONE
+}
+
+fun View.isVisible(): Boolean {
+    return visibility == View.VISIBLE
+}
+
+fun View.isInvisible(): Boolean {
+    return visibility == View.INVISIBLE
+}
+
+fun View.isGone(): Boolean {
+    return visibility == View.GONE
 }

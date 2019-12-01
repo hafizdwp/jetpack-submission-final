@@ -1,6 +1,7 @@
 package me.hafizdwp.jetpack_submission_final.data.source.remote
 
 import me.hafizdwp.jetpack_submission_final.data.ApiServiceFactory
+import me.hafizdwp.jetpack_submission_final.data.source.Movreak
 import me.hafizdwp.jetpack_submission_final.data.source.remote.api.MovieApi
 import me.hafizdwp.jetpack_submission_final.data.source.remote.api.TvShowApi
 import me.hafizdwp.jetpack_submission_final.data.source.remote.response.MovieResponse
@@ -8,7 +9,6 @@ import me.hafizdwp.jetpack_submission_final.data.source.remote.response.TvShowRe
 import me.hafizdwp.jetpack_submission_final.utils.asyncAwait
 import me.hafizdwp.jetpack_submission_final.utils.launchIO
 import me.hafizdwp.jetpack_submission_final.utils.onMain
-import me.hafizdwp.jetpack_submission_final.utils.test.EspressoIdlingResource
 
 /**
  * @author hafizdwp
@@ -19,15 +19,24 @@ class MyRemoteDataSource {
     private val movieApi by lazy { ApiServiceFactory.builder<MovieApi>() }
     private val tvShowApi by lazy { ApiServiceFactory.builder<TvShowApi>() }
 
+    suspend fun getTopRatedMovies(callback: ApiCallback<List<Movreak>>) {
+        try {
+            val response = asyncAwait { movieApi.getTopRatedMovies() }
+            callback.onSuccess(Movreak.toListFrom(response.results))
+        } catch (e: Exception) {
+            callback.onFailed(e)
+        }
+    }
+
     fun getPopularMovies(callback: ApiCallback<List<MovieResponse>>) {
-        EspressoIdlingResource.increment()
+//        EspressoIdlingResource.increment()
 
         launchIO {
             try {
                 val response = asyncAwait { movieApi.getPopularMovies() }
                 onMain {
                     callback.onSuccess(response.results ?: emptyList())
-                    EspressoIdlingResource.decrement()
+//                    EspressoIdlingResource.decrement()
                 }
             } catch (e: Exception) {
                 callback.onFailed(e)
@@ -36,14 +45,14 @@ class MyRemoteDataSource {
     }
 
     fun getPopularTvShows(callback: ApiCallback<List<TvShowResponse>>) {
-        EspressoIdlingResource.increment()
+//        EspressoIdlingResource.increment()
 
         launchIO {
             try {
                 val response = asyncAwait { tvShowApi.getPopularTvShows() }
                 onMain {
                     callback.onSuccess(response.results ?: emptyList())
-                    EspressoIdlingResource.decrement()
+//                    EspressoIdlingResource.decrement()
                 }
             } catch (e: Exception) {
                 callback.onFailed(e)

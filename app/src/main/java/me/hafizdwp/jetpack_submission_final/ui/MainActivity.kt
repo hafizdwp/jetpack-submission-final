@@ -1,10 +1,10 @@
-package me.hafizdwp.jetpack_submission_final
+package me.hafizdwp.jetpack_submission_final.ui
 
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.main_activity.*
+import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseActivity
 import me.hafizdwp.jetpack_submission_final.ui.favorite.FavoriteFragment
-import me.hafizdwp.jetpack_submission_final.utils.getTag
 
 /**
  * @author hafizdwp
@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
         get() = R.layout.main_activity
 
     val mFragmentMenuList = listOf<Fragment>(
-        MainFragment.newInstance(),
+            MainFragment.newInstance(),
         FavoriteFragment.newInstance()
     )
 

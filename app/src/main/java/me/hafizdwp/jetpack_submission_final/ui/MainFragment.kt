@@ -1,12 +1,18 @@
-package me.hafizdwp.jetpack_submission_final
+package me.hafizdwp.jetpack_submission_final.ui
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.main_fragment.*
+import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.base.BasePagerAdapter
-import me.hafizdwp.jetpack_submission_final.ui.MovieSliderFragment
+import me.hafizdwp.jetpack_submission_final.data.source.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.movie.MovieFragment
 import me.hafizdwp.jetpack_submission_final.ui.tv_show.TvShowFragment
+import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
+import me.hafizdwp.jetpack_submission_final.utils.gone
+import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
+import me.hafizdwp.jetpack_submission_final.utils.visible
 
 /**
  * @author hafizdwp
@@ -20,9 +26,13 @@ class MainFragment : BaseFragment() {
 
     override val layoutRes: Int
         get() = R.layout.main_fragment
+    override val mLifecycleOwner: LifecycleOwner
+        get() = this
 
+    val mViewModel by lazy { obtainViewModel<MainViewModel>() }
     var mSliderAdapter: BasePagerAdapter? = null
     var mTabAdapter: MainSliderAdapter? = null
+    val mListSlider = arrayListOf<Movreak>()
 
 
     override fun onExtractArguments() {
@@ -30,17 +40,53 @@ class MainFragment : BaseFragment() {
 
     override fun onReady() {
 
-        setupSlider()
+        //setupSlider()
         setupMenuTabs()
+        setupObserver()
+
+        mViewModel.getListSlider()
+    }
+
+    fun setupObserver() = mViewModel.apply {
+        requestState.observe {
+            when (it) {
+                is MyRequestState.Loading -> {
+                    myProgressView.start()
+                    vpSlider.gone()
+                    tabSlider.gone()
+                }
+                is MyRequestState.Success -> {
+                    myProgressView.stopAndGone()
+                    vpSlider.visible()
+                    tabSlider.visible()
+                }
+                is MyRequestState.Failed -> {
+                    myProgressView.stopAndError(errorMsg = it.errorMsg ?: "")
+                    myProgressView.setRetryClickListener {
+                        getListSlider()
+                    }
+                }
+            }
+        }
+
+        sliderData.observe {
+            it?.let {
+                mListSlider.clear()
+                mListSlider.addAll(it)
+                setupSlider()
+            }
+        }
     }
 
     fun setupSlider() {
         mSliderAdapter = BasePagerAdapter(childFragmentManager)
-        (0..5).forEach {
+
+        mListSlider.forEach {
             mSliderAdapter?.addFragment(
-                    fragment = MovieSliderFragment.newInstance()
+                    fragment = MainSliderFragment.newInstance(it)
             )
         }
+
         vpSlider.adapter = mSliderAdapter
         tabSlider.setupWithViewPager(vpSlider)
     }
