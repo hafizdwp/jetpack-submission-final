@@ -6,11 +6,15 @@ import kotlinx.android.synthetic.main.movie_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.ui.MainContentAdapter
 import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
+import me.hafizdwp.jetpack_submission_final.ui.tv_show.MainContentActionListener
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
+import me.hafizdwp.jetpack_submission_final.utils.toJson
+import me.hafizdwp.jetpack_submission_final.utils.toastSpammable
 
-class MovieFragment : BaseFragment() {
+class MovieFragment : BaseFragment(), MainContentActionListener {
 
     companion object {
         fun newInstance() = MovieFragment()
@@ -22,7 +26,7 @@ class MovieFragment : BaseFragment() {
         get() = this
 
     val mViewModel by lazy { obtainViewModel<MainViewModel>() }
-    var mAdapter: MovieAdapter? = null
+    var mAdapter: MainContentAdapter? = null
     val mListMovies = arrayListOf<Movreak>()
 
 
@@ -66,10 +70,21 @@ class MovieFragment : BaseFragment() {
     }
 
     fun setupRecycler() {
-        mAdapter = MovieAdapter(mListMovies)
+        mAdapter = MainContentAdapter(
+                items = mListMovies,
+                actionListener = this)
+
         recyclerView.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(requireContext(), 3)
         }
+    }
+
+    /**
+     * MainContentActionListener implementation
+     * ---------------------------------------------------------------------------------------------
+     * */
+    override fun onItemClick(data: Movreak) {
+        toastSpammable(data.toJson())
     }
 }
