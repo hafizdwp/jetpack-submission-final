@@ -10,4 +10,6 @@
     <string name="oops_error">Oops Error!</string>
     <string name="coba_lagi">Coba lagi</string>
     <string name="try_again">Try Again</string>
+    <string name="empty_favorite">Empty Favorite :(</string>
+    <string name="empty_favorite_msg">Your favorite list will show here</string>
 </resources>

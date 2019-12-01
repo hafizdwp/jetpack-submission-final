@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import me.hafizdwp.jetpack_submission_final.data.source.MyRepository
 import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
+import me.hafizdwp.jetpack_submission_final.ui.favorite.FavoriteViewModel
 
 /**
  * @author hafizdwp
@@ -23,8 +24,8 @@ class ViewModelFactory private constructor(
 
                     isAssignableFrom(MainViewModel::class.java) ->
                         MainViewModel(mApplication, mRepository)
-//                    isAssignableFrom(TvShowViewModel::class.java) ->
-//                        TvShowViewModel(mApplication, mRepository)
+                    isAssignableFrom(FavoriteViewModel::class.java) ->
+                        FavoriteViewModel(mApplication, mRepository)
 
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

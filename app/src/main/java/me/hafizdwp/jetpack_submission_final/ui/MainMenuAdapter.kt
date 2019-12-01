@@ -12,7 +12,7 @@ import me.hafizdwp.jetpack_submission_final.base.BasePagerAdapter
  * @author hafizdwp
  * 01/12/2019
  **/
-class MainSliderAdapter(fm: FragmentManager) : BasePagerAdapter(fm) {
+class MainMenuAdapter(fm: FragmentManager) : BasePagerAdapter(fm) {
 
     fun getTabView(position: Int, context: Context): View {
         return LayoutInflater.from(context).inflate(R.layout.custom_main_tab, null).apply {

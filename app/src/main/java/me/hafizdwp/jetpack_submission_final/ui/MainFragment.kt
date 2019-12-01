@@ -31,7 +31,7 @@ class MainFragment : BaseFragment() {
 
     val mViewModel by lazy { obtainViewModel<MainViewModel>() }
     var mSliderAdapter: BasePagerAdapter? = null
-    var mTabAdapter: MainSliderAdapter? = null
+    var mTabAdapter: MainMenuAdapter? = null
     val mListSlider = arrayListOf<Movreak>()
 
 
@@ -92,7 +92,7 @@ class MainFragment : BaseFragment() {
     }
 
     fun setupMenuTabs() {
-        mTabAdapter = MainSliderAdapter(childFragmentManager)
+        mTabAdapter = MainMenuAdapter(childFragmentManager)
         mTabAdapter?.addFragment(
                 fragment = MovieFragment.newInstance(),
                 title = getString(R.string.movie)

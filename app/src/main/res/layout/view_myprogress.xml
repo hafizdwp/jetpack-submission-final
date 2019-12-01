@@ -24,6 +24,13 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/imgTooltip"
+            android:layout_width="@dimen/dimens_144dp"
+            android:layout_height="@dimen/dimens_144dp"
+            android:layout_marginBottom="@dimen/dimens_16dp"
+            app:srcCompat="@drawable/ic_dunes" />
+
         <TextView
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
