@@ -120,6 +120,8 @@
                         android:id="@+id/imgFavorite"
                         android:layout_width="@dimen/dimens_30dp"
                         android:layout_height="@dimen/dimens_30dp"
+                        android:clickable="true"
+                        android:focusable="true"
                         app:srcCompat="@drawable/ic_love"
                         tools:ignore="ContentDescription" />
 

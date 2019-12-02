@@ -129,5 +129,9 @@ class DetailActivity : BaseActivity() {
             isAnyFavoriteActionOccured = true
             mViewModel.setFavorite(mData)
         }
+        layoutFavorite.setOnClickListener {
+            isAnyFavoriteActionOccured = true
+            mViewModel.setFavorite(mData)
+        }
     }
 }

@@ -1,11 +1,10 @@
 package me.hafizdwp.jetpack_submission_final.ui.splash
 
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.SplashscreenActivity
+import me.hafizdwp.jetpack_submission_final.utils.isDisplayed
+import me.hafizdwp.jetpack_submission_final.utils.withId
 import org.junit.Rule
 import org.junit.Test
 
@@ -20,8 +19,6 @@ class SplashscreenActivityTest {
 
     @Test
     fun checkImageLogo() {
-        Espresso.onView(ViewMatchers.withId(R.id.imageLogo)).apply {
-            check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        }
+        withId(R.id.imageLogo)?.isDisplayed()
     }
 }

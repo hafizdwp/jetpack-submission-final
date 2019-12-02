@@ -6,8 +6,6 @@ import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.movie_favorite_fragment.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.Const
@@ -15,6 +13,7 @@ import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.ContentActionListener
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
+import me.hafizdwp.jetpack_submission_final.utils.launchMain
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 import me.hafizdwp.jetpack_submission_final.utils.withArgs
 
@@ -46,7 +45,7 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
         setupObserver()
         setupRecycler()
 
-        GlobalScope.launch { mViewModel.getListFavoritedMovies() }
+        launchMain { mViewModel.getListFavoritedMovies() }
     }
 
     fun setupObserver() = mViewModel.apply {
@@ -61,14 +60,14 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
                 is MyRequestState.Failed -> {
                     myProgressView.stopAndError(it.errorMsg ?: "")
                     myProgressView.setRetryClickListener {
-                        GlobalScope.launch { getListFavoritedMovies() }
+                        launchMain { getListFavoritedMovies() }
                     }
                 }
             }
         }
 
         listMovies.observe {
-            if (it != null) {
+            if (!it.isNullOrEmpty()) {
                 mListMovies.clear()
 
                 it.forEach { dataNullable ->
@@ -85,7 +84,7 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
         }
 
         shouldRefreshData.observe {
-            GlobalScope.launch { getListFavoritedMovies() }
+            launchMain { getListFavoritedMovies() }
         }
     }
 

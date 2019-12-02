@@ -3,10 +3,8 @@ package me.hafizdwp.jetpack_submission_final.ui.tvshow
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.rule.ActivityTestRule
 import me.hafizdwp.jetpack_submission_final.R
-import me.hafizdwp.jetpack_submission_final.ui.movie.MovieFragment
 import me.hafizdwp.jetpack_submission_final.ui.tv_show.TvShowFragment
 import me.hafizdwp.jetpack_submission_final.utils.RecyclerViewItemCountAssertion
-import me.hafizdwp.jetpack_submission_final.utils.isDisplayed
 import me.hafizdwp.jetpack_submission_final.utils.test.EspressoIdlingResource
 import me.hafizdwp.jetpack_submission_final.utils.test.SingleFragmentActivity
 import me.hafizdwp.jetpack_submission_final.utils.withId
@@ -38,11 +36,10 @@ class TvShowFragmentTest {
     }
 
     @Test
-    fun loadMovie() {
+    fun checkViews() {
 
         // RecyclerView
-        withId(R.id.recyclerView)?.apply {
-            isDisplayed()
+        withId(R.id.recyclerTv)?.apply {
             check(RecyclerViewItemCountAssertion(unexpectedCount = 0))
         }
     }

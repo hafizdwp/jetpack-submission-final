@@ -16,8 +16,8 @@ import me.hafizdwp.jetpack_submission_final.utils.livedata.SingleLiveEvent
 class FavoriteViewModel(val app: Application,
                         val mRepository: MyRepository) : BaseViewModel() {
 
-    val movieState = SingleLiveEvent<MyRequestState>()
-    val tvState = SingleLiveEvent<MyRequestState>()
+    val movieState = MutableLiveData<MyRequestState>()
+    val tvState = MutableLiveData<MyRequestState>()
     val shouldRefreshData = MutableLiveData<Void>()
 
     val listMovies = SingleLiveEvent<List<Movreak?>>()
@@ -30,7 +30,7 @@ class FavoriteViewModel(val app: Application,
         mRepository.getListFavoriteByType(Movreak.Type.MOVIE.name, object : ApiCallback<List<Movreak?>> {
             override fun onSuccess(data: List<Movreak?>) {
                 movieState.success()
-                listMovies.postValue(data)
+                listMovies.value = (data)
             }
 
             override fun onFailed(e: Exception) {
@@ -45,7 +45,7 @@ class FavoriteViewModel(val app: Application,
         mRepository.getListFavoriteByType(Movreak.Type.TV_SHOW.name, object : ApiCallback<List<Movreak?>> {
             override fun onSuccess(data: List<Movreak?>) {
                 tvState.success()
-                listTvShows.postValue(data)
+                listTvShows.value = (data)
             }
 
             override fun onFailed(e: Exception) {

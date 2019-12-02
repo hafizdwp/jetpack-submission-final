@@ -32,11 +32,6 @@ class DetailViewModel(val app: Application,
                 }
             }
         }
-//
-//        data?.let {
-//            mRepository.saveFavorite(data)
-//            favoriteStatus.value = !isFavorited
-//        }
     }
 
     fun getFavoriteById(id: Int) = launch {
@@ -46,6 +41,7 @@ class DetailViewModel(val app: Application,
             }
 
             override fun onFailed(e: Exception) {
+                e.printStackTrace()
             }
         })
     }

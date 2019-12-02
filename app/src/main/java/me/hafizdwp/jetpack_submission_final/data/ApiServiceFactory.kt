@@ -16,11 +16,11 @@ import java.util.concurrent.TimeUnit
 object ApiServiceFactory {
 
     val mClient: OkHttpClient.Builder = OkHttpClient.Builder()
-//            .apply {
+            .apply {
 //                if (BuildConfig.DEBUG) {
 //                    addInterceptor(ChuckInterceptor(MyApp.getContext()))
 //                }
-//            }
+            }
             .addInterceptor(
                     HttpLoggingInterceptor().apply {
                         level = HttpLoggingInterceptor.Level.BODY

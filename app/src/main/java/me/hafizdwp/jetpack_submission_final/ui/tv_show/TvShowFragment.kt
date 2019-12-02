@@ -80,7 +80,7 @@ class TvShowFragment : BaseFragment(), ContentActionListener {
                 items = mListTvShows,
                 actionListener = this)
 
-        recyclerView.apply {
+        recyclerTv.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(requireContext(), 3)
         }
