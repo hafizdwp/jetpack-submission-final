@@ -6,13 +6,14 @@ import kotlinx.android.synthetic.main.tv_show_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
-import me.hafizdwp.jetpack_submission_final.ui.MainContentAdapter
+import me.hafizdwp.jetpack_submission_final.ui.ContentAdapter
+import me.hafizdwp.jetpack_submission_final.ui.ContentActionListener
 import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 
-class TvShowFragment : BaseFragment(), MainContentActionListener {
+class TvShowFragment : BaseFragment(), ContentActionListener {
 
     companion object {
         fun newInstance() = TvShowFragment()
@@ -24,7 +25,7 @@ class TvShowFragment : BaseFragment(), MainContentActionListener {
         get() = this
 
     val mViewModel by lazy { obtainViewModel<MainViewModel>() }
-    var mAdapter: MainContentAdapter? = null
+    var mAdapter: ContentAdapter? = null
     val mListTvShows = arrayListOf<Movreak>()
 
 
@@ -67,7 +68,7 @@ class TvShowFragment : BaseFragment(), MainContentActionListener {
     }
 
     fun setupRecycler() {
-        mAdapter = MainContentAdapter(
+        mAdapter = ContentAdapter(
                 items = mListTvShows,
                 actionListener = this)
 
@@ -78,7 +79,7 @@ class TvShowFragment : BaseFragment(), MainContentActionListener {
     }
 
     /**
-     * MainContentActionListener implementation
+     * ContentActionListener implementation
      * ---------------------------------------------------------------------------------------------
      * */
     override fun onItemClick(data: Movreak) {

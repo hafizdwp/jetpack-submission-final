@@ -1,4 +1,4 @@
-package me.hafizdwp.jetpack_submission_final.ui.tv_show
+package me.hafizdwp.jetpack_submission_final.ui
 
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 
@@ -6,6 +6,6 @@ import me.hafizdwp.jetpack_submission_final.data.model.Movreak
  * @author hafizdwp
  * 02/12/2019
  **/
-interface MainContentActionListener {
+interface ContentActionListener {
     fun onItemClick(data: Movreak)
 }

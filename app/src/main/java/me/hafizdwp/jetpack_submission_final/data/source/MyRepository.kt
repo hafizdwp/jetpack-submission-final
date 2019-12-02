@@ -30,6 +30,18 @@ open class MyRepository : MyDataSource {
         return localDataSource.saveFavorite(data)
     }
 
+    override suspend fun deleteFavorite(data: Movreak) {
+        return localDataSource.deleteFavorite(data)
+    }
+
+    override suspend fun getFavoriteById(id: Int, callback: ApiCallback<Movreak?>) {
+        return localDataSource.getFavoriteById(id, callback)
+    }
+
+    override suspend fun getListFavoriteByType(typeInString: String, callback: ApiCallback<List<Movreak?>>) {
+        return localDataSource.getListFavoriteByType(typeInString, callback)
+    }
+
     //    override fun getPopularMovies(): LiveData<List<MovieResponse>> {
 //        val liveData = MutableLiveData<List<MovieResponse>>()
 //        remoteDataSource.getPopularMovies(object : ApiCallback<List<MovieResponse>> {

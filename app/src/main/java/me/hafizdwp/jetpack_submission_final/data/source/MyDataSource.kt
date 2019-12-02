@@ -26,4 +26,12 @@ interface MyDataSource {
     ///
     ///
     suspend fun saveFavorite(data: Movreak)
+
+    suspend fun deleteFavorite(data: Movreak)
+
+    suspend fun getFavoriteById(id: Int,
+                                callback: ApiCallback<Movreak?>)
+
+    suspend fun getListFavoriteByType(typeInString: String,
+                                      callback: ApiCallback<List<Movreak?>>)
 }

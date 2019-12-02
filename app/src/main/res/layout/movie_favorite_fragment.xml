@@ -2,12 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightBlackDesign"
     android:orientation="vertical">
 
     <me.hafizdwp.jetpack_submission_final.utils.widget.MyProgressView
         android:id="@+id/myProgressView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackDesign"
+        android:clipToPadding="false"
+        android:fadeScrollbars="true"
+        android:paddingLeft="@dimen/dimens_8dp"
+        android:paddingTop="@dimen/dimens_8dp"
+        android:paddingRight="@dimen/dimens_8dp"
+        android:paddingBottom="@dimen/dimens_16dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical" />
 
 </LinearLayout>

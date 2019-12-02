@@ -11,6 +11,7 @@ import me.hafizdwp.jetpack_submission_final.base.BaseActivity
 import me.hafizdwp.jetpack_submission_final.data.Const
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
+import me.hafizdwp.jetpack_submission_final.utils.toastSpammable
 import me.hafizdwp.jetpack_submission_final.utils.withLoadingPlaceholder
 
 /**
@@ -22,8 +23,10 @@ class DetailActivity : BaseActivity() {
     companion object {
         const val EXTRA_MOVREAK_DATA = "extra_data"
 
-        fun startActivity(context: Context,
-                          data: Movreak) {
+        fun startActivity(
+                context: Context,
+                data: Movreak
+        ) {
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra(EXTRA_MOVREAK_DATA, data)
             }
@@ -47,6 +50,9 @@ class DetailActivity : BaseActivity() {
         setupObserver()
         setupToolbar()
         setupData()
+
+        // get favorite
+        mViewModel.getFavoriteById(mData?.id ?: 0)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -62,6 +68,10 @@ class DetailActivity : BaseActivity() {
                     false -> imgFavorite.setImageResource(R.drawable.ic_love)
                 }
             }
+        })
+
+        globalToast.observe(this@DetailActivity, Observer {
+            toastSpammable(it)
         })
     }
 
@@ -90,7 +100,7 @@ class DetailActivity : BaseActivity() {
 
 
         imgFavorite.setOnClickListener {
-            mViewModel.saveFavorite(mData, false)
+            mViewModel.setFavorite(mData)
         }
     }
 }

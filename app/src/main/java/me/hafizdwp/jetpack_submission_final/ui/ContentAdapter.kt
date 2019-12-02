@@ -7,11 +7,10 @@ import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseRecyclerAdapter
 import me.hafizdwp.jetpack_submission_final.data.Const
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
-import me.hafizdwp.jetpack_submission_final.ui.tv_show.MainContentActionListener
 import me.hafizdwp.jetpack_submission_final.utils.withLoadingPlaceholder
 
-class MainContentAdapter(val items: List<Movreak>,
-                         val actionListener: MainContentActionListener) : BaseRecyclerAdapter<Movreak>() {
+class ContentAdapter(val items: List<Movreak>,
+                     val actionListener: ContentActionListener) : BaseRecyclerAdapter<Movreak>() {
 
     override val bindItemLayoutRes: Int?
         get() = R.layout.main_content_item

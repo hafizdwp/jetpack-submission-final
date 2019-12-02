@@ -61,6 +61,16 @@
         app:tabIndicatorColor="@color/black"
         app:tabMode="fixed" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_gravity="bottom"
+        android:background="@color/greyDesign"
+        android:elevation="@dimen/dimens_2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
     <me.hafizdwp.jetpack_submission_final.utils.widget.EnhancedWrapContentViewPager
         android:id="@+id/viewPager"
         android:layout_width="0dp"

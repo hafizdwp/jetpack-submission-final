@@ -88,7 +88,7 @@
                 <me.hafizdwp.jetpack_submission_final.utils.widget.MyProgressView
                     android:id="@+id/myProgressView"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dimens_192dp"
+                    android:layout_height="@dimen/dimens_216dp"
                     android:background="@color/lightBlackDesign"
                     android:gravity="center"
                     android:visibility="gone"
@@ -99,7 +99,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/vpSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimens_192dp"
+                    android:layout_height="@dimen/dimens_216dp"
                     android:visibility="visible"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
