@@ -2,6 +2,7 @@ package me.hafizdwp.jetpack_submission_final.ui
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.main_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment

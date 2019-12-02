@@ -8,6 +8,7 @@ import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.Const
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
+import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
 import me.hafizdwp.jetpack_submission_final.utils.withArgs
 import me.hafizdwp.jetpack_submission_final.utils.withLoadingPlaceholder
 
@@ -47,5 +48,14 @@ class MainSliderFragment : BaseFragment() {
         textOverview.text = mData?.overview
         ratingBar.rating = ((mData?.rating ?: 0.0) / 2).toFloat()
         textRating.text = "${(mData?.rating ?: 0)} / 10"
+
+        rootConstraint.setOnClickListener {
+            mData?.let { it1 ->
+                DetailActivity.startActivity(
+                        context = requireContext(),
+                        data = it1
+                )
+            }
+        }
     }
 }
