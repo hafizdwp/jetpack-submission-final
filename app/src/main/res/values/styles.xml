@@ -21,4 +21,9 @@
         <item name="fontFamily">@font/montserrat_regular</item>
     </style>
 
+    <style name="MyToolbar" parent="AppTheme">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:colorControlNormal">@color/white</item>
+    </style>
+
 </resources>

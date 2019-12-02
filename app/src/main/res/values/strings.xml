@@ -12,4 +12,9 @@
     <string name="try_again">Try Again</string>
     <string name="empty_favorite">Empty Favorite :(</string>
     <string name="empty_favorite_msg">Your favorite list will show here</string>
+    <string name="overview">Overview</string>
+    <string name="dummy_desc">Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the
+            music world by storm when they form the rock n roll band Queen in 1970. Hit songs become instant classics.
+            When Mercurys increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest
+            challenge yet – finding a way to keep the band together amid the success and excess.</string>
 </resources>

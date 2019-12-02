@@ -12,6 +12,7 @@ import me.hafizdwp.jetpack_submission_final.data.source.remote.response.TvShowRe
 
 @Parcelize
 data class Movreak(
+        val id: Int = 0,
         val title: String? = "",
         val overview: String? = "",
         val posterPath: String? = "",
@@ -30,6 +31,7 @@ data class Movreak(
             val array = arrayListOf<Movreak>()
             list?.forEach {
                 array.add(Movreak(
+                        id = it.id ?: 0,
                         title = it.title,
                         overview = it.overview,
                         posterPath = it.poster_path,
@@ -46,6 +48,7 @@ data class Movreak(
             val array = arrayListOf<Movreak>()
             list?.forEach {
                 array.add(Movreak(
+                        id = it.id ?: 0,
                         title = it.name,
                         overview = it.overview,
                         posterPath = it.poster_path,

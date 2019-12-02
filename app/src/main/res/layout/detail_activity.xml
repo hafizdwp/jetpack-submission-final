@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:background="@color/blackDesign"
+        android:theme="@style/MyToolbar"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textToolbarTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="?actionBarSize"
+                android:ellipsize="end"
+                android:fontFamily="@font/montserrat_bold"
+                android:maxLines="1"
+                android:textAlignment="center"
+                android:textColor="@color/yellowDesign"
+                android:textSize="@dimen/size_18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Bumblebee" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_gravity="bottom"
+        android:background="@color/greyDesign"
+        android:elevation="@dimen/dimens_2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/blackDesign"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="@dimen/dimens_16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgPhoto"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimens_256dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/poster_dragon" />
+
+            <View
+                android:id="@+id/views"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.6"
+                android:background="#000"
+                app:layout_constraintBottom_toBottomOf="@+id/imgPhoto"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="@+id/imgPhoto"
+                app:layout_constraintRight_toRightOf="@+id/imgPhoto"
+                app:layout_constraintTop_toTopOf="@+id/imgPhoto"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <!-- Love -->
+            <LinearLayout
+                android:layout_width="@dimen/dimens_63dp"
+                android:layout_height="@dimen/dimens_63dp"
+                android:layout_marginEnd="@dimen/dimens_36dp"
+                android:background="@drawable/bg_circle_white"
+                android:elevation="@dimen/dimens_4dp"
+                android:gravity="center"
+                android:padding="1dp"
+                app:layout_constraintBottom_toBottomOf="@+id/views"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/views">
+
+                <LinearLayout
+                    android:id="@+id/layoutFavorite"
+                    android:layout_width="@dimen/dimens_60dp"
+                    android:layout_height="@dimen/dimens_60dp"
+                    android:background="@drawable/bg_circle"
+                    android:elevation="@dimen/dimens_3dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imgFavorite"
+                        android:layout_width="@dimen/dimens_30dp"
+                        android:layout_height="@dimen/dimens_30dp"
+                        app:srcCompat="@drawable/ic_love"
+                        tools:ignore="ContentDescription" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0.5dp"
+                android:background="@color/gray_light"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/views" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardPoster"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimens_172dp"
+                android:layout_marginStart="@dimen/dimens_24dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/dimens_4dp"
+                app:cardElevation="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/views"
+                app:layout_constraintDimensionRatio="2:3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/views"
+                app:layout_constraintVertical_bias="1.7">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="@dimen/dimens_1dp"
+                    app:cardCornerRadius="@dimen/dimens_4dp"
+                    app:cardUseCompatPadding="true">
+
+                    <ImageView
+                        android:id="@+id/imgPoster"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        tools:ignore="ContentDescription"
+                        tools:src="@drawable/poster_dragon" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_24dp"
+                android:layout_marginTop="@dimen/dimens_16dp"
+                android:layout_marginRight="@dimen/dimens_24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardPoster">
+
+                <TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Bumblebee" />
+
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textTitle"
+                    app:srb_numberOfStars="5"
+                    app:srb_rating="4.5" />
+
+                <TextView
+                    android:id="@+id/textRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimens_16dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                    app:layout_constraintLeft_toRightOf="@+id/ratingBar"
+                    app:layout_constraintTop_toTopOf="@+id/ratingBar"
+                    tools:text="8.2" />
+
+                <TextView
+                    android:id="@+id/textDescLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimens_20dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/overview"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/size_16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+                <TextView
+                    android:id="@+id/textDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/size_14sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textDescLabel"
+                    tools:text="@string/dummy_desc" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

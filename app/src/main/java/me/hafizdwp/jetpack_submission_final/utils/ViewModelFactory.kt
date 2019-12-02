@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import me.hafizdwp.jetpack_submission_final.data.source.MyRepository
 import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
+import me.hafizdwp.jetpack_submission_final.ui.detail.DetailViewModel
 import me.hafizdwp.jetpack_submission_final.ui.favorite.FavoriteViewModel
 
 /**
@@ -26,6 +27,8 @@ class ViewModelFactory private constructor(
                         MainViewModel(mApplication, mRepository)
                     isAssignableFrom(FavoriteViewModel::class.java) ->
                         FavoriteViewModel(mApplication, mRepository)
+                    isAssignableFrom(DetailViewModel::class.java) ->
+                        DetailViewModel(mApplication, mRepository)
 
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
