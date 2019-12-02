@@ -4,9 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseActivity
 import me.hafizdwp.jetpack_submission_final.ui.favorite.FavoriteFragment
+import me.hafizdwp.jetpack_submission_final.utils.toastSpammable
 
 /**
  * @author hafizdwp
@@ -70,4 +74,32 @@ class MainActivity : BaseActivity() {
             }
         }.commit()
     }
+
+    override fun onBackPressed() {
+        handleBackPressed()
+    }
+
+    private fun handleBackPressed() {
+        when {
+            bottomNav.selectedItemId != R.id.bnav_main -> bottomNav.selectedItemId = R.id.bnav_main
+            bottomNav.selectedItemId == R.id.bnav_main -> checkIsDoublePressed()
+            else -> checkIsDoublePressed()
+        }
+    }
+
+    private fun checkIsDoublePressed() {
+        if (isDoubleBackPressed) {
+            super.onBackPressed()
+        } else {
+            isDoubleBackPressed = true
+            toastSpammable(getString(R.string.double_exit))
+            GlobalScope.launch {
+                delay(2000L)
+                isDoubleBackPressed = false
+            }
+        }
+    }
+
+    var isDoubleBackPressed = false
+
 }
