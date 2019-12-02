@@ -6,6 +6,8 @@ import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.movie_favorite_fragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.Const
@@ -44,7 +46,7 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
         setupObserver()
         setupRecycler()
 
-        mViewModel.getListFavoritedMovies()
+        GlobalScope.launch { mViewModel.getListFavoritedMovies() }
     }
 
     fun setupObserver() = mViewModel.apply {
@@ -59,7 +61,7 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
                 is MyRequestState.Failed -> {
                     myProgressView.stopAndError(it.errorMsg ?: "")
                     myProgressView.setRetryClickListener {
-                        getListFavoritedMovies()
+                        GlobalScope.launch { getListFavoritedMovies() }
                     }
                 }
             }
@@ -83,7 +85,7 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
         }
 
         shouldRefreshData.observe {
-            getListFavoritedMovies()
+            GlobalScope.launch { getListFavoritedMovies() }
         }
     }
 

@@ -3,6 +3,8 @@ package me.hafizdwp.jetpack_submission_final.ui
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.base.BasePagerAdapter
@@ -44,7 +46,7 @@ class MainFragment : BaseFragment() {
         setupMenuTabs()
         setupObserver()
 
-        mViewModel.getListSlider()
+        GlobalScope.launch { mViewModel.getListSlider() }
     }
 
     fun setupObserver() = mViewModel.apply {
@@ -63,7 +65,9 @@ class MainFragment : BaseFragment() {
                 is MyRequestState.Failed -> {
                     myProgressView.stopAndError(it.errorMsg ?: "")
                     myProgressView.setRetryClickListener {
-                        getListSlider()
+                        GlobalScope.launch {
+                            getListSlider()
+                        }
                     }
                 }
             }
@@ -113,6 +117,7 @@ class MainFragment : BaseFragment() {
         })
         tabMenu.setupWithViewPager(vpMenu)
 
+        // Workaround to get the custom tabs shown
         vpMenu.currentItem = 1
         vpMenu.currentItem = 0
     }

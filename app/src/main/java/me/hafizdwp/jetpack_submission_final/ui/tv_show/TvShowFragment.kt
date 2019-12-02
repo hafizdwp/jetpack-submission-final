@@ -6,6 +6,8 @@ import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.tv_show_fragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.Const
@@ -41,7 +43,7 @@ class TvShowFragment : BaseFragment(), ContentActionListener {
         setupObserver()
         setupRecycler()
 
-        mViewModel.getPopularTvShows()
+        GlobalScope.launch { mViewModel.getPopularTvShows() }
     }
 
     fun setupObserver() = mViewModel.apply {
@@ -56,8 +58,10 @@ class TvShowFragment : BaseFragment(), ContentActionListener {
                 is MyRequestState.Failed -> {
                     tvProgress.stopAndError(it.errorMsg ?: "")
                     tvProgress.setRetryClickListener {
-                        getPopularMovies()
-                        getPopularTvShows()
+                        GlobalScope.launch {
+                            getPopularMovies()
+                            getPopularTvShows()
+                        }
                     }
                 }
             }

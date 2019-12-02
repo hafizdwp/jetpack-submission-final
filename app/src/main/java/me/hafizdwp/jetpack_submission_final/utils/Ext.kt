@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -20,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import me.hafizdwp.jetpack_submission_final.utils.test.OneTimeObserver
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -82,6 +84,11 @@ fun <T> MutableLiveData<T>.call() {
 
 fun <T> MutableLiveData<T>.postCall() {
     postValue(null)
+}
+
+fun <T> LiveData<T>.observeOnce(todo: (T) -> Any?) {
+    val oneTimeObserver = OneTimeObserver(todo = todo)
+    observe(oneTimeObserver, oneTimeObserver)
 }
 
 /**

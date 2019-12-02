@@ -20,20 +20,17 @@ class FavoriteViewModel(val app: Application,
     val tvState = SingleLiveEvent<MyRequestState>()
     val shouldRefreshData = MutableLiveData<Void>()
 
-    val listMovies = MutableLiveData<List<Movreak?>>()
-    val listTvShows = MutableLiveData<List<Movreak?>>()
+    val listMovies = SingleLiveEvent<List<Movreak?>>()
+    val listTvShows = SingleLiveEvent<List<Movreak?>>()
 
 
-    fun getListFavoritedMovies() = launch {
+    suspend fun getListFavoritedMovies() {
+
         movieState.loading()
         mRepository.getListFavoriteByType(Movreak.Type.MOVIE.name, object : ApiCallback<List<Movreak?>> {
             override fun onSuccess(data: List<Movreak?>) {
                 movieState.success()
-
-                if (data.isNullOrEmpty())
-                    listMovies.value = null
-                else
-                    listMovies.value = data
+                listMovies.postValue(data)
             }
 
             override fun onFailed(e: Exception) {
@@ -42,16 +39,13 @@ class FavoriteViewModel(val app: Application,
         })
     }
 
-    fun getListFavoritedTvShow() = launch {
+    suspend fun getListFavoritedTvShow() {
+
         tvState.loading()
         mRepository.getListFavoriteByType(Movreak.Type.TV_SHOW.name, object : ApiCallback<List<Movreak?>> {
             override fun onSuccess(data: List<Movreak?>) {
                 tvState.success()
-
-                if (data.isNullOrEmpty())
-                    listTvShows.value = null
-                else
-                    listTvShows.value = data
+                listTvShows.postValue(data)
             }
 
             override fun onFailed(e: Exception) {

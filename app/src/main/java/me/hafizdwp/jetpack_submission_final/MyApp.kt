@@ -14,9 +14,9 @@ class MyApp : Application() {
     }
 
     companion object {
-        private lateinit var instance: MyApp
+        private var instance: MyApp? = null
 
-        fun getContext() = instance.applicationContext
+        fun getContext() = instance?.applicationContext
     }
 
     override fun onCreate() {

@@ -12,8 +12,8 @@ import me.hafizdwp.jetpack_submission_final.utils.asyncAwait
  **/
 class MyRemoteDataSource {
 
-    private val movieApi by lazy { ApiServiceFactory.builder<MovieApi>() }
-    private val tvShowApi by lazy { ApiServiceFactory.builder<TvShowApi>() }
+    val movieApi by lazy { ApiServiceFactory.builder<MovieApi>() }
+    val tvShowApi by lazy { ApiServiceFactory.builder<TvShowApi>() }
 
     suspend fun getTopRatedMovies(callback: ApiCallback<List<Movreak>>) {
         try {

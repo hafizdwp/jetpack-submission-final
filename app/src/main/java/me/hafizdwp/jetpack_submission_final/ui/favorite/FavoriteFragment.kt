@@ -70,6 +70,7 @@ class FavoriteFragment : BaseFragment() {
         })
         tabLayout.setupWithViewPager(viewPager)
 
+        // Workaround to get the custom tabs shown
         viewPager.currentItem = 1
         viewPager.currentItem = 0
     }
