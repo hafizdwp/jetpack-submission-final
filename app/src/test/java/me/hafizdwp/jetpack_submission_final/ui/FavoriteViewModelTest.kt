@@ -1,13 +1,11 @@
 package me.hafizdwp.jetpack_submission_final.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import me.hafizdwp.jetpack_submission_final.MyApp
 import me.hafizdwp.jetpack_submission_final.data.source.MyRepository
 import me.hafizdwp.jetpack_submission_final.ui.favorite.FavoriteViewModel
 import me.hafizdwp.jetpack_submission_final.utils.observeOnce
-import org.junit.Assert.*
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,25 +33,15 @@ class FavoriteViewModelTest {
 
     @Test
     fun getListFavoritedMovies() {
-        runBlocking {
-            launch {
-                viewModel.getListFavoritedMovies()
-            }
-            viewModel.listMovies.observeOnce {
-                assertNotNull(it)
-            }
+        viewModel.listPagedMovies?.observeOnce {
+            assertNotNull(it)
         }
     }
 
     @Test
     fun getListFavoritedTvShows() {
-        runBlocking {
-            launch {
-                viewModel.getListFavoritedTvShow()
-            }
-            viewModel.listTvShows.observeOnce {
-                assertNotNull(it)
-            }
+        viewModel.listPagedTvShows?.observeOnce {
+            assertNotNull(it)
         }
     }
 }

@@ -1,5 +1,6 @@
 package me.hafizdwp.jetpack_submission_final.data.source
 
+import androidx.paging.DataSource
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.data.source.local.MyLocalDataSource
 import me.hafizdwp.jetpack_submission_final.data.source.remote.ApiCallback
@@ -42,6 +43,10 @@ open class MyRepository : MyDataSource {
         return localDataSource.getListFavoriteByType(typeInString, callback)
     }
 
+    fun getPagedListFavoriteByType(typeInString: String): DataSource.Factory<Int, Movreak>? {
+        return localDataSource.getPagedListFavoriteByType(typeInString)
+    }
+
     //    override fun getPopularMovies(): LiveData<List<MovieResponse>> {
 //        val liveData = MutableLiveData<List<MovieResponse>>()
 //        remoteDataSource.getPopularMovies(object : ApiCallback<List<MovieResponse>> {
@@ -74,7 +79,9 @@ open class MyRepository : MyDataSource {
 //        return liveData
 //    }
 
-    companion object {
+            companion
+
+    object {
 
         private var INSTANCE: MyRepository? = null
 

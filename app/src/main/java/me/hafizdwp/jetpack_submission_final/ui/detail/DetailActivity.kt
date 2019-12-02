@@ -28,12 +28,12 @@ class DetailActivity : BaseActivity() {
         const val EXTRA_MOVREAK_DATA = "extra_data"
 
         fun startActivity(context: Context,
-                          options: ActivityOptions,
-                          data: Movreak) {
+                          data: Movreak,
+                          options: ActivityOptions? = null) {
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra(EXTRA_MOVREAK_DATA, data)
             }
-            context.startActivity(intent, options.toBundle())
+            context.startActivity(intent, options?.toBundle())
         }
 
         fun startActivityForResults(context: Context,

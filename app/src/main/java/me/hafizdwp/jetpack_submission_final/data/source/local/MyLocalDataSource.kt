@@ -1,5 +1,6 @@
 package me.hafizdwp.jetpack_submission_final.data.source.local
 
+import androidx.paging.DataSource
 import me.hafizdwp.jetpack_submission_final.MyApp
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.data.source.local.dao.FavoriteDao
@@ -53,5 +54,9 @@ class MyLocalDataSource {
         } catch (e: Exception) {
             callback.onFailed(e)
         }
+    }
+
+    fun getPagedListFavoriteByType(typeInString: String) : DataSource.Factory<Int, Movreak>? {
+        return favoriteDao?.getPagedListFavoriteByType(typeInString)
     }
 }

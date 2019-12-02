@@ -1,5 +1,6 @@
 package me.hafizdwp.jetpack_submission_final.data.source.local.dao
 
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -13,6 +14,9 @@ import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 
 @Dao
 interface FavoriteDao {
+
+    @Query("SELECT * FROM ${Movreak.TABLE_NAME} WHERE ${Movreak.COLUMN_TYPE} IN(:typeInString) ORDER BY ${Movreak.COLUMN_ID} DESC")
+    fun getPagedListFavoriteByType(typeInString: String): DataSource.Factory<Int, Movreak>
 
     @Query("SELECT * FROM ${Movreak.TABLE_NAME} WHERE ${Movreak.COLUMN_TYPE} IN(:typeInString) ORDER BY ${Movreak.COLUMN_ID} DESC")
     suspend fun getListFavoriteByType(typeInString: String): List<Movreak?>

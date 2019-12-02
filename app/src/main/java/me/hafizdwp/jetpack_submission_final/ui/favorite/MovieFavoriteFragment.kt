@@ -1,19 +1,15 @@
 package me.hafizdwp.jetpack_submission_final.ui.favorite
 
-import android.app.ActivityOptions
-import android.util.Pair
 import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.movie_favorite_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
-import me.hafizdwp.jetpack_submission_final.data.Const
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.ContentActionListener
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
-import me.hafizdwp.jetpack_submission_final.utils.launchMain
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 import me.hafizdwp.jetpack_submission_final.utils.withArgs
 
@@ -33,8 +29,7 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
         get() = this
 
     val mViewModel by lazy { obtainViewModel<FavoriteViewModel>() }
-    val mListMovies = arrayListOf<Movreak>()
-    var mAdapter: MovieFavoriteAdapter? = null
+    var mAdapter: ContentPagedAdapter? = null
 
 
     override fun onExtractArguments() {
@@ -45,7 +40,7 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
         setupObserver()
         setupRecycler()
 
-        launchMain { mViewModel.getListFavoritedMovies() }
+        callMoviesFavorite()
     }
 
     fun setupObserver() = mViewModel.apply {
@@ -60,23 +55,15 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
                 is MyRequestState.Failed -> {
                     myProgressView.stopAndError(it.errorMsg ?: "")
                     myProgressView.setRetryClickListener {
-                        launchMain { getListFavoritedMovies() }
+                        callMoviesFavorite()
                     }
                 }
             }
         }
 
-        listMovies.observe {
-            if (!it.isNullOrEmpty()) {
-                mListMovies.clear()
-
-                it.forEach { dataNullable ->
-                    dataNullable?.let { data ->
-                        mListMovies.add(data)
-                    }
-                }
-
-                mAdapter?.notifyDataSetChanged()
+        listPagedMovies?.observe {
+            if (!it?.toList().isNullOrEmpty()) {
+                mAdapter?.submitList(it)
             } else {
                 myProgressView.start()
                 myProgressView.stopAndEmptyFavorite()
@@ -84,13 +71,27 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
         }
 
         shouldRefreshData.observe {
-            launchMain { getListFavoritedMovies() }
+            callMoviesFavorite()
+        }
+    }
+
+    fun callMoviesFavorite() = mViewModel.apply {
+
+        movieState.loading()
+
+        listPagedMovies?.observe {
+            if (!it?.toList().isNullOrEmpty()) {
+                movieState.success()
+                mAdapter?.submitList(it)
+            } else {
+                myProgressView.start()
+                myProgressView.stopAndEmptyFavorite()
+            }
         }
     }
 
     fun setupRecycler() {
-        mAdapter = MovieFavoriteAdapter(
-                items = mListMovies,
+        mAdapter = ContentPagedAdapter(
                 actionListener = this@MovieFavoriteFragment
         )
 
@@ -105,15 +106,8 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
      * ---------------------------------------------------------------------------------------------
      * */
     override fun onItemClick(data: Movreak, imgView: ImageView) {
-        val options = ActivityOptions.makeSceneTransitionAnimation(
-                activity,
-                Pair.create(imgView, Const.SHARED_ELEMENT_POSTER)
-        )
-
-        DetailActivity.startActivityForResults(
+        DetailActivity.startActivity(
                 context = requireContext(),
-                fragment = (parentFragment as? FavoriteFragment) ?: this,
-                options = options,
                 data = data
         )
     }

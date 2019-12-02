@@ -1,19 +1,15 @@
 package me.hafizdwp.jetpack_submission_final.ui.favorite
 
-import android.app.ActivityOptions
-import android.util.Pair
 import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.tv_show_favorite_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
-import me.hafizdwp.jetpack_submission_final.data.Const
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.ContentActionListener
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
-import me.hafizdwp.jetpack_submission_final.utils.launchMain
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 import me.hafizdwp.jetpack_submission_final.utils.withArgs
 
@@ -33,8 +29,7 @@ class TvShowFavoriteFragment : BaseFragment(), ContentActionListener {
         get() = this
 
     val mViewModel by lazy { obtainViewModel<FavoriteViewModel>() }
-    val mListTvShows = arrayListOf<Movreak>()
-    var mAdapter: TvShowFavoriteAdapter? = null
+    var mAdapter: ContentPagedAdapter? = null
 
 
     override fun onExtractArguments() {
@@ -45,7 +40,7 @@ class TvShowFavoriteFragment : BaseFragment(), ContentActionListener {
         setupObserver()
         setupRecycler()
 
-        launchMain { mViewModel.getListFavoritedTvShow() }
+        callTvShowFavorite()
     }
 
     fun setupObserver() = mViewModel.apply {
@@ -60,41 +55,38 @@ class TvShowFavoriteFragment : BaseFragment(), ContentActionListener {
                 is MyRequestState.Failed -> {
                     myProgressView.stopAndError(it.errorMsg ?: "")
                     myProgressView.setRetryClickListener {
-                        launchMain { mViewModel.getListFavoritedTvShow() }
+                        callTvShowFavorite()
                     }
                 }
             }
         }
 
-        listTvShows.observe {
-            if (!it.isNullOrEmpty()) {
-                mListTvShows.clear()
+        shouldRefreshData.observe {
+            callTvShowFavorite()
+        }
+    }
 
-                it.forEach { dataNullable ->
-                    dataNullable?.let { data ->
-                        mListTvShows.add(data)
-                    }
-                }
+    fun callTvShowFavorite() = mViewModel.apply {
 
-                mAdapter?.notifyDataSetChanged()
+        tvState.loading()
+
+        listPagedTvShows?.observe {
+            if (!it?.toList().isNullOrEmpty()) {
+                tvState.success()
+                mAdapter?.submitList(it)
             } else {
                 myProgressView.start()
                 myProgressView.stopAndEmptyFavorite()
             }
         }
-
-        shouldRefreshData.observe {
-            launchMain { mViewModel.getListFavoritedTvShow() }
-        }
     }
 
     fun setupRecycler() {
-        mAdapter = TvShowFavoriteAdapter(
-                items = mListTvShows,
+        mAdapter = ContentPagedAdapter(
                 actionListener = this@TvShowFavoriteFragment
         )
 
-        recyclerView.apply {
+        recyclerTvFavorite.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(requireContext(), 3)
         }
@@ -105,15 +97,8 @@ class TvShowFavoriteFragment : BaseFragment(), ContentActionListener {
      * ---------------------------------------------------------------------------------------------
      * */
     override fun onItemClick(data: Movreak, imgView: ImageView) {
-        val options = ActivityOptions.makeSceneTransitionAnimation(
-                activity,
-                Pair.create(imgView, Const.SHARED_ELEMENT_POSTER)
-        )
-
-        DetailActivity.startActivityForResults(
+        DetailActivity.startActivity(
                 context = requireContext(),
-                fragment = (parentFragment as? FavoriteFragment) ?: this,
-                options = options,
                 data = data
         )
     }
