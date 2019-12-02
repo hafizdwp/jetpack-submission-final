@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.movie_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.MainContentAdapter
 import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity

@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.main_slider_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.Const
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.utils.withArgs
 import me.hafizdwp.jetpack_submission_final.utils.withLoadingPlaceholder
 

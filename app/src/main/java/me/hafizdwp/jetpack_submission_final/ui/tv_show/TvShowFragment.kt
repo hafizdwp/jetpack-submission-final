@@ -5,14 +5,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.tv_show_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.MainContentAdapter
 import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
-import me.hafizdwp.jetpack_submission_final.utils.toJson
-import me.hafizdwp.jetpack_submission_final.utils.toastSpammable
 
 class TvShowFragment : BaseFragment(), MainContentActionListener {
 

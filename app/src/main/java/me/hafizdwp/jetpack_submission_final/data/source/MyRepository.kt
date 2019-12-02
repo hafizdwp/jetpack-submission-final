@@ -1,13 +1,9 @@
 package me.hafizdwp.jetpack_submission_final.data.source
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.data.source.local.MyLocalDataSource
 import me.hafizdwp.jetpack_submission_final.data.source.remote.ApiCallback
 import me.hafizdwp.jetpack_submission_final.data.source.remote.MyRemoteDataSource
-import me.hafizdwp.jetpack_submission_final.data.source.remote.response.MovieResponse
-import me.hafizdwp.jetpack_submission_final.data.source.remote.response.TvShowResponse
-import me.hafizdwp.jetpack_submission_final.utils.log
 
 /**
  * @author hafizdwp
@@ -28,6 +24,10 @@ open class MyRepository : MyDataSource {
 
     override suspend fun getPopularTvShows(callback: ApiCallback<List<Movreak>>) {
         return remoteDataSource.getPopularTvShows(callback)
+    }
+
+    override suspend fun saveFavorite(data: Movreak) {
+        return localDataSource.saveFavorite(data)
     }
 
     //    override fun getPopularMovies(): LiveData<List<MovieResponse>> {

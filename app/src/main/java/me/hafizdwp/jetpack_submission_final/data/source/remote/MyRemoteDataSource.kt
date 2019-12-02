@@ -1,7 +1,7 @@
 package me.hafizdwp.jetpack_submission_final.data.source.remote
 
 import me.hafizdwp.jetpack_submission_final.data.ApiServiceFactory
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.data.source.remote.api.MovieApi
 import me.hafizdwp.jetpack_submission_final.data.source.remote.api.TvShowApi
 import me.hafizdwp.jetpack_submission_final.utils.asyncAwait

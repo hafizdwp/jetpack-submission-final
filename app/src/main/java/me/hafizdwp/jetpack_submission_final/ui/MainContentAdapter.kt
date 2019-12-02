@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.main_content_item.view.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseRecyclerAdapter
 import me.hafizdwp.jetpack_submission_final.data.Const
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.tv_show.MainContentActionListener
 import me.hafizdwp.jetpack_submission_final.utils.withLoadingPlaceholder
 

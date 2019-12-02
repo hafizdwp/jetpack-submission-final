@@ -3,12 +3,13 @@ package me.hafizdwp.jetpack_submission_final.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.detail_activity.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseActivity
 import me.hafizdwp.jetpack_submission_final.data.Const
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 import me.hafizdwp.jetpack_submission_final.utils.withLoadingPlaceholder
 
@@ -43,6 +44,7 @@ class DetailActivity : BaseActivity() {
     }
 
     override fun onReady() {
+        setupObserver()
         setupToolbar()
         setupData()
     }
@@ -50,6 +52,17 @@ class DetailActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         onBackPressed()
         return true
+    }
+
+    fun setupObserver() = mViewModel.apply {
+        favoriteStatus.observe(this@DetailActivity, Observer {
+            it?.let {
+                when (it) {
+                    true -> imgFavorite.setImageResource(R.drawable.ic_loved)
+                    false -> imgFavorite.setImageResource(R.drawable.ic_love)
+                }
+            }
+        })
     }
 
     fun setupToolbar() {
@@ -74,5 +87,10 @@ class DetailActivity : BaseActivity() {
         textRating.text = mData?.rating.toString()
         ratingBar.rating = ((mData?.rating ?: 0.0) / 2).toFloat()
         textDesc.text = mData?.overview ?: "-"
+
+
+        imgFavorite.setOnClickListener {
+            mViewModel.saveFavorite(mData, false)
+        }
     }
 }

@@ -3,6 +3,8 @@ package me.hafizdwp.jetpack_submission_final.base
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 /**
  * @author hafizdwp

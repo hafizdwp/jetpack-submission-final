@@ -1,6 +1,7 @@
 package me.hafizdwp.jetpack_submission_final
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 
 /**
  * @author hafizdwp
@@ -16,5 +17,12 @@ class MyApp : Application() {
         private lateinit var instance: MyApp
 
         fun getContext() = instance.applicationContext
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        // Stetho
+        Stetho.initializeWithDefaults(this)
     }
 }

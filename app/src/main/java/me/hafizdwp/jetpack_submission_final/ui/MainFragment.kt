@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.main_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.base.BasePagerAdapter
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.movie.MovieFragment
 import me.hafizdwp.jetpack_submission_final.ui.tv_show.TvShowFragment
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState

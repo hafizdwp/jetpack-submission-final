@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import me.hafizdwp.jetpack_submission_final.base.BaseViewModel
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.data.source.MyRepository
 import me.hafizdwp.jetpack_submission_final.data.source.remote.ApiCallback
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState

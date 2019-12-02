@@ -1,5 +1,6 @@
 package me.hafizdwp.jetpack_submission_final.data.source
 
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.data.source.remote.ApiCallback
 
 /**
@@ -24,4 +25,5 @@ interface MyDataSource {
     /// LOCAL
     ///
     ///
+    suspend fun saveFavorite(data: Movreak)
 }

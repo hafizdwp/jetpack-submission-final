@@ -93,6 +93,8 @@ dependencies {
     implementation 'com.iarcuschin:simpleratingbar:0.1.5'
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.readystatesoftware.chuck:library:1.1.0'
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"

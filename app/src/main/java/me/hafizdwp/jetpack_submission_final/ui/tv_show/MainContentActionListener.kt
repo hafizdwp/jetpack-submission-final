@@ -1,6 +1,6 @@
 package me.hafizdwp.jetpack_submission_final.ui.tv_show
 
-import me.hafizdwp.jetpack_submission_final.data.source.Movreak
+import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 
 /**
  * @author hafizdwp
