@@ -1,15 +1,19 @@
 package me.hafizdwp.jetpack_submission_final.ui.movie
 
+import android.app.ActivityOptions
+import android.util.Pair
+import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.movie_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
+import me.hafizdwp.jetpack_submission_final.data.Const
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
+import me.hafizdwp.jetpack_submission_final.ui.ContentActionListener
 import me.hafizdwp.jetpack_submission_final.ui.ContentAdapter
 import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
-import me.hafizdwp.jetpack_submission_final.ui.ContentActionListener
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 
@@ -84,10 +88,15 @@ class MovieFragment : BaseFragment(), ContentActionListener {
      * ContentActionListener implementation
      * ---------------------------------------------------------------------------------------------
      * */
-    override fun onItemClick(data: Movreak) {
-//        toastSpammable(data.toJson())
+    override fun onItemClick(data: Movreak, imgView: ImageView) {
+        val options = ActivityOptions.makeSceneTransitionAnimation(
+                activity,
+                Pair.create(imgView, Const.SHARED_ELEMENT_POSTER)
+        )
+
         DetailActivity.startActivity(
                 context = requireContext(),
+                options = options,
                 data = data
         )
     }

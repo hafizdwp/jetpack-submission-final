@@ -10,4 +10,6 @@ object Const {
     const val BASE_IMAGE_PATH_W780 = "https://image.tmdb.org/t/p/w780"
     const val BASE_IMAGE_PATH_W1280 = "https://image.tmdb.org/t/p/w1280"
     const val BASE_IMAGE_PATH = "https://image.tmdb.org/t/p/original"
+
+    const val SHARED_ELEMENT_POSTER = "poster"
 }

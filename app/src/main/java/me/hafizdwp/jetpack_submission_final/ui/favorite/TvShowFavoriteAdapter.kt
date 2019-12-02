@@ -34,7 +34,7 @@ class TvShowFavoriteAdapter(val items: List<Movreak>,
                 textRating.text = model.rating.toString()
 
                 rootView.setOnClickListener {
-                    actionListener.onItemClick(model)
+                    actionListener.onItemClick(model, imageView)
                 }
             }
         }

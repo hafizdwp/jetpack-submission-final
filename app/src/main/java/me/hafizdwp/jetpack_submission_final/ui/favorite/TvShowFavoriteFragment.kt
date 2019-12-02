@@ -1,10 +1,14 @@
 package me.hafizdwp.jetpack_submission_final.ui.favorite
 
+import android.app.ActivityOptions
+import android.util.Pair
+import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.tv_show_favorite_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
+import me.hafizdwp.jetpack_submission_final.data.Const
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
 import me.hafizdwp.jetpack_submission_final.ui.ContentActionListener
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
@@ -99,10 +103,16 @@ class TvShowFavoriteFragment : BaseFragment(), ContentActionListener {
      * ContentActionListener implementation
      * ---------------------------------------------------------------------------------------------
      * */
-    override fun onItemClick(data: Movreak) {
+    override fun onItemClick(data: Movreak, imgView: ImageView) {
+        val options = ActivityOptions.makeSceneTransitionAnimation(
+                activity,
+                Pair.create(imgView, Const.SHARED_ELEMENT_POSTER)
+        )
+
         DetailActivity.startActivityForResults(
                 context = requireContext(),
                 fragment = (parentFragment as? FavoriteFragment) ?: this,
+                options = options,
                 data = data
         )
     }

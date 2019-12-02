@@ -1,8 +1,10 @@
 package me.hafizdwp.jetpack_submission_final.ui.detail
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
@@ -26,20 +28,22 @@ class DetailActivity : BaseActivity() {
         const val EXTRA_MOVREAK_DATA = "extra_data"
 
         fun startActivity(context: Context,
+                          options: ActivityOptions,
                           data: Movreak) {
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra(EXTRA_MOVREAK_DATA, data)
             }
-            context.startActivity(intent)
+            context.startActivity(intent, options.toBundle())
         }
 
         fun startActivityForResults(context: Context,
                                     fragment: Fragment,
+                                    options: ActivityOptions,
                                     data: Movreak) {
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra(EXTRA_MOVREAK_DATA, data)
             }
-            fragment.startActivityForResult(intent, 0)
+            fragment.startActivityForResult(intent, 0, options.toBundle())
         }
     }
 
@@ -48,6 +52,7 @@ class DetailActivity : BaseActivity() {
 
     lateinit var mViewModel: DetailViewModel
     var mData: Movreak? = null
+    var isAnyFavoriteActionOccured = false
 
 
     override fun onExtractIntents() {
@@ -59,6 +64,7 @@ class DetailActivity : BaseActivity() {
         setupObserver()
         setupToolbar()
         setupData()
+        setupTransition()
 
         // get favorite
         mViewModel.getFavoriteById(mData?.id ?: 0)
@@ -70,7 +76,9 @@ class DetailActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        setResult(FavoriteFragment.CODE_SHOULD_REFRESH_DATA)
+        if (isAnyFavoriteActionOccured)
+            setResult(FavoriteFragment.CODE_SHOULD_REFRESH_DATA)
+
         super.onBackPressed()
     }
 
@@ -87,6 +95,10 @@ class DetailActivity : BaseActivity() {
         globalToast.observe(this@DetailActivity, Observer {
             toastSpammable(it)
         })
+    }
+
+    fun setupTransition() {
+        ViewCompat.setTransitionName(imgPoster, Const.SHARED_ELEMENT_POSTER)
     }
 
     fun setupToolbar() {
@@ -114,6 +126,7 @@ class DetailActivity : BaseActivity() {
 
 
         imgFavorite.setOnClickListener {
+            isAnyFavoriteActionOccured = true
             mViewModel.setFavorite(mData)
         }
     }
