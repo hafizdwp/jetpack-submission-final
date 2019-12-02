@@ -40,37 +40,37 @@ open class BaseViewModel : ViewModel(), CoroutineScope {
                                action: suspend CoroutineScope.() -> T): T =
             CoroutineScope(context).async { action(this) }.await()
 
-    fun MutableLiveData<MyRequestState>.loading() {
-        postValue(MyRequestState.Loading)
-    }
-
-    fun MutableLiveData<MyRequestState>.success() {
-        postValue(MyRequestState.Success)
-    }
-
-    fun MutableLiveData<MyRequestState>.empty(emptyMsg: String?) {
-        postValue(MyRequestState.Empty(emptyMsg))
-    }
-
-    fun MutableLiveData<MyRequestState>.failed(errorMsg: String?) {
-        postValue(MyRequestState.Failed(errorMsg))
-    }
-
 //    fun MutableLiveData<MyRequestState>.loading() {
-//        value = MyRequestState.Loading
+//        postValue(MyRequestState.Loading)
 //    }
 //
 //    fun MutableLiveData<MyRequestState>.success() {
-//        value = MyRequestState.Success
+//        postValue(MyRequestState.Success)
 //    }
 //
 //    fun MutableLiveData<MyRequestState>.empty(emptyMsg: String?) {
-//        value = MyRequestState.Empty(emptyMsg)
+//        postValue(MyRequestState.Empty(emptyMsg))
 //    }
 //
 //    fun MutableLiveData<MyRequestState>.failed(errorMsg: String?) {
-//        value = MyRequestState.Failed(errorMsg)
+//        postValue(MyRequestState.Failed(errorMsg))
 //    }
+
+    fun MutableLiveData<MyRequestState>.loading() {
+        value = MyRequestState.Loading
+    }
+
+    fun MutableLiveData<MyRequestState>.success() {
+        value = MyRequestState.Success
+    }
+
+    fun MutableLiveData<MyRequestState>.empty(emptyMsg: String?) {
+        value = MyRequestState.Empty(emptyMsg)
+    }
+
+    fun MutableLiveData<MyRequestState>.failed(errorMsg: String?) {
+        value = MyRequestState.Failed(errorMsg)
+    }
 
     /**
      * Coroutine catch error message

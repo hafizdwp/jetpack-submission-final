@@ -29,7 +29,8 @@ class MainViewModel(val app: Application,
         mRepository.getTopRatedMovies(object : ApiCallback<List<Movreak>> {
             override fun onSuccess(data: List<Movreak>) {
                 sliderState.success()
-                sliderData.postValue(data)
+//                sliderData.postValue(data)
+                sliderData.value = (data)
             }
 
             override fun onFailed(e: Exception) {
@@ -45,7 +46,8 @@ class MainViewModel(val app: Application,
         mRepository.getPopularMovies(object : ApiCallback<List<Movreak>> {
             override fun onSuccess(data: List<Movreak>) {
                 movieState.success()
-                movieData.postValue(data)
+//                movieData.postValue(data)
+                movieData.value = (data)
             }
 
             override fun onFailed(e: Exception) {
@@ -61,7 +63,8 @@ class MainViewModel(val app: Application,
         mRepository.getPopularTvShows(object : ApiCallback<List<Movreak>> {
             override fun onSuccess(data: List<Movreak>) {
                 tvState.success()
-                tvData.postValue(data)
+//                tvData.postValue(data)
+                tvData.value = (data)
             }
 
             override fun onFailed(e: Exception) {

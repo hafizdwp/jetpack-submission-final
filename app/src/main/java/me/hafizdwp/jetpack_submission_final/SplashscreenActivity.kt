@@ -1,7 +1,8 @@
 package me.hafizdwp.jetpack_submission_final
 
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.base.BaseActivity
 import me.hafizdwp.jetpack_submission_final.ui.MainActivity
 
@@ -18,7 +19,7 @@ class SplashscreenActivity : BaseActivity() {
     }
 
     override fun onReady() {
-        runBlocking {
+        GlobalScope.launch {
             delay(1000L)
             MainActivity.startActivity(this@SplashscreenActivity)
             this@SplashscreenActivity.finish()

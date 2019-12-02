@@ -102,6 +102,12 @@ fun launchIO(todo: suspend CoroutineScope.() -> Unit) {
     }
 }
 
+fun launchMain(todo: suspend CoroutineScope.() -> Unit) {
+    CoroutineScope(Dispatchers.Main).launch {
+        todo()
+    }
+}
+
 suspend fun onMain(todo: suspend CoroutineScope.() -> Unit) {
     withContext(Dispatchers.Main) {
         todo()

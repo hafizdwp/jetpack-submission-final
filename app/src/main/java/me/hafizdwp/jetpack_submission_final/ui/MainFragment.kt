@@ -3,8 +3,6 @@ package me.hafizdwp.jetpack_submission_final.ui
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.base.BasePagerAdapter
@@ -13,6 +11,7 @@ import me.hafizdwp.jetpack_submission_final.ui.movie.MovieFragment
 import me.hafizdwp.jetpack_submission_final.ui.tv_show.TvShowFragment
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
 import me.hafizdwp.jetpack_submission_final.utils.gone
+import me.hafizdwp.jetpack_submission_final.utils.launchMain
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 import me.hafizdwp.jetpack_submission_final.utils.visible
 
@@ -46,7 +45,7 @@ class MainFragment : BaseFragment() {
         setupMenuTabs()
         setupObserver()
 
-        GlobalScope.launch { mViewModel.getListSlider() }
+        launchMain { mViewModel.getListSlider() }
     }
 
     fun setupObserver() = mViewModel.apply {
@@ -65,7 +64,7 @@ class MainFragment : BaseFragment() {
                 is MyRequestState.Failed -> {
                     myProgressView.stopAndError(it.errorMsg ?: "")
                     myProgressView.setRetryClickListener {
-                        GlobalScope.launch {
+                        launchMain {
                             getListSlider()
                         }
                     }

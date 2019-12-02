@@ -6,8 +6,6 @@ import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.movie_fragment.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.Const
@@ -17,6 +15,7 @@ import me.hafizdwp.jetpack_submission_final.ui.ContentAdapter
 import me.hafizdwp.jetpack_submission_final.ui.MainViewModel
 import me.hafizdwp.jetpack_submission_final.ui.detail.DetailActivity
 import me.hafizdwp.jetpack_submission_final.utils.MyRequestState
+import me.hafizdwp.jetpack_submission_final.utils.launchMain
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 
 class MovieFragment : BaseFragment(), ContentActionListener {
@@ -43,7 +42,7 @@ class MovieFragment : BaseFragment(), ContentActionListener {
         setupObserver()
         setupRecycler()
 
-        GlobalScope.launch { mViewModel.getPopularMovies() }
+        launchMain { mViewModel.getPopularMovies() }
     }
 
     fun setupObserver() = mViewModel.apply {
@@ -58,7 +57,7 @@ class MovieFragment : BaseFragment(), ContentActionListener {
                 is MyRequestState.Failed -> {
                     movieProgress.stopAndError(it.errorMsg ?: "")
                     movieProgress.setRetryClickListener {
-                        GlobalScope.launch {
+                        launchMain {
                             getPopularMovies()
                             getPopularTvShows()
                         }

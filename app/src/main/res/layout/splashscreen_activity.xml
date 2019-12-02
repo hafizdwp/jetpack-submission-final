@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/imageLogo"
         android:layout_width="@dimen/dimens_144dp"
         android:layout_height="@dimen/dimens_144dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -14,6 +15,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_popcorn" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

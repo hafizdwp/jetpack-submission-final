@@ -28,6 +28,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name=".utils.test.SingleFragmentActivity" />
 
     </application>
 
