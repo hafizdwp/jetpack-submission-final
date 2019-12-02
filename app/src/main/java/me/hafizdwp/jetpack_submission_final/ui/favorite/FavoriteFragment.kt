@@ -1,18 +1,19 @@
 package me.hafizdwp.jetpack_submission_final.ui.favorite
 
+import android.content.Intent
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.favorite_fragment.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.ui.MainMenuAdapter
+import me.hafizdwp.jetpack_submission_final.utils.call
 import me.hafizdwp.jetpack_submission_final.utils.obtainViewModel
 
 class FavoriteFragment : BaseFragment() {
 
     companion object {
+        const val CODE_SHOULD_REFRESH_DATA = 1000
         fun newInstance() = FavoriteFragment()
     }
 
@@ -31,6 +32,20 @@ class FavoriteFragment : BaseFragment() {
     override fun onReady() {
 
         setupTabs()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            mViewModel.shouldRefreshData.call()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == CODE_SHOULD_REFRESH_DATA) {
+            mViewModel.shouldRefreshData.call()
+        }
     }
 
     fun setupTabs() {

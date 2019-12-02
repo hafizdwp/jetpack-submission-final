@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.utils.gone
@@ -18,6 +19,7 @@ import me.hafizdwp.jetpack_submission_final.utils.visible
  **/
 class MyProgressView(internal var context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
+    var layoutRoot: RelativeLayout
     var progressBar: ProgressBar
     var textTitle: TextView
     var textLabel: TextView
@@ -26,6 +28,7 @@ class MyProgressView(internal var context: Context, attrs: AttributeSet) : Linea
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.view_myprogress, null).apply {
+            layoutRoot = findViewById(R.id.layoutRoot)
             progressBar = findViewById(R.id.progressBar)
             textTitle = findViewById(R.id.textTitle)
             textLabel = findViewById(R.id.textLabel)
@@ -91,5 +94,9 @@ class MyProgressView(internal var context: Context, attrs: AttributeSet) : Linea
 
     fun setRetryClickListener(todo: () -> Unit) {
         button.setOnClickListener { todo() }
+    }
+
+    fun useDarkerBackground() {
+        layoutRoot.setBackgroundColor(context.resources.getColor(R.color.blackDesign))
     }
 }

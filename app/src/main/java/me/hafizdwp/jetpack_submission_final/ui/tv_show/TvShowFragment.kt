@@ -44,15 +44,16 @@ class TvShowFragment : BaseFragment(), ContentActionListener {
         tvState.observe {
             when (it) {
                 is MyRequestState.Loading -> {
-                    myProgressView.start()
+                    tvProgress.start()
                 }
                 is MyRequestState.Success -> {
-                    myProgressView.stopAndGone()
+                    tvProgress.stopAndGone()
                 }
                 is MyRequestState.Failed -> {
-                    myProgressView.stopAndError(it.errorMsg ?: "")
-                    myProgressView.setRetryClickListener {
+                    tvProgress.stopAndError(it.errorMsg ?: "")
+                    tvProgress.setRetryClickListener {
                         getPopularMovies()
+                        getPopularTvShows()
                     }
                 }
             }

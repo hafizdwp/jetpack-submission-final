@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <me.hafizdwp.jetpack_submission_final.utils.widget.MyProgressView
-        android:id="@+id/myProgressView"
+        android:id="@+id/tvProgress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"

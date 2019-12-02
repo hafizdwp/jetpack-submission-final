@@ -36,6 +36,7 @@ class TvShowFavoriteFragment : BaseFragment(), ContentActionListener {
     }
 
     override fun onReady() {
+        myProgressView.useDarkerBackground()
         setupObserver()
         setupRecycler()
 
@@ -76,6 +77,10 @@ class TvShowFavoriteFragment : BaseFragment(), ContentActionListener {
                 myProgressView.stopAndEmptyFavorite()
             }
         }
+
+        shouldRefreshData.observe {
+            getListFavoritedTvShow()
+        }
     }
 
     fun setupRecycler() {
@@ -95,8 +100,9 @@ class TvShowFavoriteFragment : BaseFragment(), ContentActionListener {
      * ---------------------------------------------------------------------------------------------
      * */
     override fun onItemClick(data: Movreak) {
-        DetailActivity.startActivity(
+        DetailActivity.startActivityForResults(
                 context = requireContext(),
+                fragment = (parentFragment as? FavoriteFragment) ?: this,
                 data = data
         )
     }

@@ -18,6 +18,7 @@ class FavoriteViewModel(val app: Application,
 
     val movieState = SingleLiveEvent<MyRequestState>()
     val tvState = SingleLiveEvent<MyRequestState>()
+    val shouldRefreshData = MutableLiveData<Void>()
 
     val listMovies = MutableLiveData<List<Movreak?>>()
     val listTvShows = MutableLiveData<List<Movreak?>>()

@@ -2,7 +2,7 @@ package me.hafizdwp.jetpack_submission_final.ui.favorite
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.movie_fragment.*
+import kotlinx.android.synthetic.main.movie_favorite_fragment.*
 import me.hafizdwp.jetpack_submission_final.R
 import me.hafizdwp.jetpack_submission_final.base.BaseFragment
 import me.hafizdwp.jetpack_submission_final.data.model.Movreak
@@ -36,6 +36,7 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
     }
 
     override fun onReady() {
+        myProgressView.useDarkerBackground()
         setupObserver()
         setupRecycler()
 
@@ -76,6 +77,10 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
                 myProgressView.stopAndEmptyFavorite()
             }
         }
+
+        shouldRefreshData.observe {
+            getListFavoritedMovies()
+        }
     }
 
     fun setupRecycler() {
@@ -95,8 +100,9 @@ class MovieFavoriteFragment : BaseFragment(), ContentActionListener {
      * ---------------------------------------------------------------------------------------------
      * */
     override fun onItemClick(data: Movreak) {
-        DetailActivity.startActivity(
+        DetailActivity.startActivityForResults(
                 context = requireContext(),
+                fragment = (parentFragment as? FavoriteFragment) ?: this,
                 data = data
         )
     }

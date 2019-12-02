@@ -76,6 +76,10 @@ inline fun <reified T> String.fromJson(): T = gson.fromJson(this, makeType<T>())
  * ---------------------------------------------------------------------------------------------
  * */
 
+fun <T> MutableLiveData<T>.call() {
+    value = null
+}
+
 fun <T> MutableLiveData<T>.postCall() {
     postValue(null)
 }

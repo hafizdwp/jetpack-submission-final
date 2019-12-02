@@ -45,15 +45,16 @@ class MovieFragment : BaseFragment(), ContentActionListener {
         movieState.observe {
             when (it) {
                 is MyRequestState.Loading -> {
-                    myProgressView.start()
+                    movieProgress.start()
                 }
                 is MyRequestState.Success -> {
-                    myProgressView.stopAndGone()
+                    movieProgress.stopAndGone()
                 }
                 is MyRequestState.Failed -> {
-                    myProgressView.stopAndError(it.errorMsg ?: "")
-                    myProgressView.setRetryClickListener {
+                    movieProgress.stopAndError(it.errorMsg ?: "")
+                    movieProgress.setRetryClickListener {
                         getPopularMovies()
+                        getPopularTvShows()
                     }
                 }
             }
