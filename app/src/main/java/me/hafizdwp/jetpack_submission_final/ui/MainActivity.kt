@@ -1,5 +1,7 @@
 package me.hafizdwp.jetpack_submission_final.ui
 
+import android.content.Context
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.main_activity.*
 import me.hafizdwp.jetpack_submission_final.R
@@ -12,12 +14,17 @@ import me.hafizdwp.jetpack_submission_final.ui.favorite.FavoriteFragment
  **/
 class MainActivity : BaseActivity() {
 
+    companion object {
+        fun startActivity(context: Context) =
+                context.startActivity(Intent(context, MainActivity::class.java))
+    }
+
     override val layoutRes: Int
         get() = R.layout.main_activity
 
     val mFragmentMenuList = listOf<Fragment>(
             MainFragment.newInstance(),
-        FavoriteFragment.newInstance()
+            FavoriteFragment.newInstance()
     )
 
 
